@@ -22,13 +22,22 @@ public class CreateDemo {
         Session  session = sessionFactory.getCurrentSession();
         try {
             // create the objects
+/*
             Instructor instructor = new Instructor("Chad","Darby","darby@luv2code.com");
 
             InstructorDetail instructorDetail = new InstructorDetail("https://www.lv2code.com/youtebe","luv 2 code !!!");
 
             // associate the objects
             instructor.setInstructorDetail(instructorDetail);
+*/
 
+            // create the objects
+            Instructor instructor = new Instructor("Madhu","Patel","madhu@luv2code.com");
+
+            InstructorDetail instructorDetail = new InstructorDetail("https://www.youtube.com","Guitar");
+
+            // associate the objects
+            instructor.setInstructorDetail(instructorDetail);
 
             // start a transaction
             session.beginTransaction();
