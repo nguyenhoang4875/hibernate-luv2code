@@ -1,6 +1,8 @@
 package com.luv2code.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "student")
@@ -19,6 +21,15 @@ public class Student {
 
     @Column(name = "email")
     private String email;
+
+    @ManyToMany(fetch = FetchType.LAZY,cascade = {CascadeType.DETACH,CascadeType.MERGE,
+            CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinTable(
+            name = "course_student",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private List<Course> courses;
 
     public Student(){
 
@@ -60,6 +71,22 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    // add method convenient
+    public void addCourse(Course course){
+        if (courses == null){
+            courses = new ArrayList<>();
+        }
+        courses.add(course);
     }
 
     @Override
